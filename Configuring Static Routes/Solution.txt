@@ -1,0 +1,68 @@
+Step 1, we should assign IP addresses to the three interfaces of R4 
+and use the no shutdown command to activate them."
+
+R4> enable
+R4# configure terminal
+
+R4(config)# interface g0/0
+R4(config-if)# ip address 192.168.13.4 255.255.255.0
+R4(config-if)# no shutdown
+
+R4(config)# interface g0/1
+R4(config-if)# ip address 192.168.16.4 255.255.255.0
+R4(config-if)# no shutdown
+
+R4(config)# interface g0/2
+R4(config-if)# ip address 192.168.19.0 255.255.255.0
+R4(config-if)# no shutdown
+
+---------------------------------------------------------------
+Step 2: Add Static Routes on R4 for the Three LANs
+
+
+R4(config)# ip route 192.168.1.0 255.255.255.0 192.168.13.1
+
+R4(config)# ip route 192.168.2.0 255.255.255.0 192.168.16.2
+
+R4(config)# ip route 192.168.3.0 255.255.255.0 192.168.19.3
+
+--------------------------------------------------------------
+Step 3: Add Static Routes on R1 for the Two Other LANs
+
+R1> enable
+R1# configure terminal
+R1(config)# ip route 192.168.2.0 255.255.255.0 192.168.13.4
+R1(config)# ip route 192.168.3.0 255.255.255.0 192.168.13.4
+R1(config)# end
+R1# write memory
+
+-------------------------------------------------------------
+Step 4: Add Static Routes on R2 for the Two Other LANs
+
+R2> enable
+R2# configure terminal
+R2(config)# ip route 192.168.1.0 255.255.255.0 192.168.16.4
+R2(config)# ip route 192.168.3.0 255.255.255.0 192.168.16.4
+R2(config)# end
+R2# write memory
+
+-------------------------------------------------------------
+Step 5: Add Static Routes on R3 for the Two Other LANs
+
+R3> enable
+R3# configure terminal
+R3(config)# ip route 192.168.1.0 255.255.255.0 192.168.19.4
+R3(config)# ip route 192.168.2.0 255.255.255.0 192.168.19.4
+R3(config)# end
+R3# write memory
+-------------------------------------------------------------
+
+
+Step 6: Verify Connectivity Between Clients on Different Networks
+ 
+
+
+
+
+
+
